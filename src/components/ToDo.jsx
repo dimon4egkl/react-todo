@@ -32,6 +32,7 @@ export const ToDo = () => {
             item={todo}
             onRemove={onRemove} 
             onCheck={onCheck}
+            onFinishEdit={onFinishEdit}
           />) }
       </ul>
     )
@@ -58,12 +59,16 @@ export const ToDo = () => {
   }
 
   const removeAllCheckedItems = () => {
-    setTodos(todos.filter(item => !item.checked))
+    todos.map(item => onRemove(item.id));
   }
 
   const onCheck = (id) => {
     const index = todos.findIndex(todo => todo.id === id);
-    
+    axios.post(
+      `https://api.todoist.com/rest/v1/tasks/${id}/close`,
+      null,
+      config
+    );
     if (index !== -1) {
       const todo = todos[index];
 
@@ -73,6 +78,14 @@ export const ToDo = () => {
       setTodos([...todos]);
     }
   }
+  
+const onFinishEdit = (id, newname) => {
+  axios.post(
+    `https://api.todoist.com/rest/v1/tasks/${id}`,
+    {content: newname},
+    config
+  );
+}
 
   const onSubmit = async (title, description) => {
     const todo = {content:title, description};
