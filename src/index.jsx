@@ -1,28 +1,26 @@
 import React from 'react';
+import 'materialize-css/dist/css/materialize.min.css';
 import ReactDOM from 'react-dom';
-import { Layout, Row, Col } from 'antd';
+import { Container, Footer, Row, Col, Navbar } from 'react-materialize';
 
 import { ToDo } from './components/ToDo';
 
 import 'antd/dist/antd.css'
 import './index.css';
 
-const { Header, Footer, Content } = Layout;
 
 
 const App = () => {
   return (
-    <Layout>
-      <Header></Header>
-      <Content>
+    <Container>
+      <Container>
         <Row>
-          <Col span={12} offset={6} className="todo">
+          <Col>
             <ToDo />
           </Col>
         </Row>
-      </Content>
-      <Footer></Footer>
-    </Layout>
+      </Container>
+    </Container>
   )
 }
 

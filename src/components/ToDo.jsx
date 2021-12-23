@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, Divider } from 'antd';
+import { Card, Divider } from 'react-materialize';
 import { ToDoItem } from './ToDoItem';
 import { ToDoForm } from './ToDoForm';
+
 
 const token = '0f0acfe2d331a7855e16bffbdf0860a2486127ae'
 const config = {
@@ -33,6 +34,8 @@ export const ToDo = () => {
             onRemove={onRemove} 
             onCheck={onCheck}
             onFinishEdit={onFinishEdit}
+            todos={todos}
+            setTodos={setTodos}
           />) }
       </ul>
     )

@@ -1,9 +1,10 @@
 import React  from 'react';
-import { Button, Checkbox, Input } from 'antd';
+import M from 'materialize-css'
+import { Button, Checkbox, TextInput } from 'react-materialize';
 import ReactDOM from 'react-dom';
 
 export const ToDoItem = (props) => {
-  const { item, onCheck, onRemove, onFinishEdit } = props;
+  const { item, onCheck, onRemove, onFinishEdit, todos, setTodos } = props;
   const isChecked = item.checked;
   const onRemoveItem = (e) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ export const ToDoItem = (props) => {
 
   const getEditContent = () => {
     return <div style={{display: "block", flexDirection: "row", justifyContent: "space-between", width: "300px"}}>
-    <div style={{fontWeight: "bold", fontSize: "150%" }}><Input id={"input-"+item.id} type="text"></Input></div><div>{item.description}</div></div>
+    <div style={{fontWeight: "bold", fontSize: "150%" }}><TextInput id={"input-"+item.id}></TextInput></div><div>{item.description}</div></div>
   }
 
   const onFinishEditItem = (e) => {
@@ -39,18 +40,18 @@ export const ToDoItem = (props) => {
 
   const getItemAfterEdit = () => {
     return (
-      <li className="todo-item" id={item.id}>
-      <Checkbox id={`checkbox-${item.id}`}
-         style={{color: isChecked ? "red" : "black"}}
-        onChange={onChange}
-      >{getContent()}</Checkbox>
-      <Button onClick={onEditItem}> 
-      <img src="https://img.icons8.com/material-outlined/20/000000/edit--v1.png"/>
-      </Button>
-      <Button danger onClick={onRemoveItem} type={"primary"} >
-        <img src="https://img.icons8.com/ios/20/000000/trash--v1.png"/>
-        </Button>
-    </li>  
+      <React.Fragment>
+        <Checkbox id={`checkbox-${item.id}`}
+      style={{color: isChecked ? "red" : "black"}}
+     onChange={onChange}
+   ></Checkbox>
+   {getContent()}
+   <Button onClick={onEditItem}> 
+   <img src="https://img.icons8.com/material-outlined/20/000000/edit--v1.png"/>
+   </Button>
+   <Button onClick={onRemoveItem} >
+     <img src="https://img.icons8.com/ios/20/000000/trash--v1.png"/>
+     </Button></React.Fragment>
     );
   }
 
@@ -64,24 +65,24 @@ export const ToDoItem = (props) => {
 
   const renderEditFields = () => {
     return (
-      <li className="todo-item" id={item.id}>
+      <React.Fragment>
       <Checkbox id={`checkbox-${item.id}`}
          style={{color: isChecked ? "red" : "black"}}
         onChange={onChange}
-      >{getEditContent()}</Checkbox>
+      ></Checkbox>
+      {getEditContent()}
       <Button onClick={onFinishEditItem}>
       <img src="https://img.icons8.com/material-outlined/20/000000/checkmark--v1.png"/>
       </Button>
-      <Button danger onClick={onRemoveItem} type={"primary"} >
+      <Button onClick={onRemoveItem} >
         <img src="https://img.icons8.com/ios/20/000000/trash--v1.png"/>
         </Button>
-    </li>
+      </React.Fragment>
     )
   }
 
   const getNewName = () => {
     const todoItem = document.getElementById(item.id);
-    console.log(todoItem);
     ReactDOM.render(renderEditFields(), todoItem) ;
   }
 
@@ -96,11 +97,12 @@ export const ToDoItem = (props) => {
       <Checkbox id={`checkbox-${item.id}`}
          style={{color: isChecked ? "red" : "black"}}
         onChange={onChange}
-      >{getContent()}</Checkbox>
+      ></Checkbox>
+      {getContent()}
       <Button onClick={onEditItem}> 
       <img src="https://img.icons8.com/material-outlined/20/000000/edit--v1.png"/>
       </Button>
-      <Button danger onClick={onRemoveItem} type={"primary"} >
+      <Button onClick={onRemoveItem}>
         <img src="https://img.icons8.com/ios/20/000000/trash--v1.png"/>
         </Button>
     </li>
